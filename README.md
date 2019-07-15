@@ -14,8 +14,8 @@
 
 ## Penulis
 
-**Aurelia Gabriele** - **`672017277`**
-**Erlangga Ibrahim** - **`672017282`**
+* **Aurelia Gabriele** - **`672017277`**
+* **Erlangga Ibrahim** - **`672017282`**
 
 ## Deskripsi Tugas
 
