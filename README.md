@@ -12,6 +12,10 @@
 >  
 > **PERINGATAN** : *Tugas ini dirilis **tanpa garansi**, termasuk nilai yang di-nihilkan oleh sebab **mencontek** dan/atau **menyalin** dan/atau **meniru** yang bersumber dari tugas ini*
 
+## Pengawas / Dosen
+
+* **Pratyaksa Ocsa Saian**
+
 ## Penulis
 
 * **Aurelia Gabriele** - **`672017277`**
