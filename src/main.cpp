@@ -7,6 +7,7 @@
 #include <GL/freeglut.h>
 
 #include "control.hpp"
+#include "render.hpp"
 
 #define WIDTH 800
 #define HEIGHT 600
@@ -29,7 +30,7 @@ Init(void)
     glHint(GL_MULTISAMPLE_FILTER_HINT_NV, GL_NICEST);
 
     glutDisplayFunc(RenderDisplay);
-    
+
     glutMouseFunc(MouseEvent);
     glutKeyboardFunc(KeyboardDownEvent);
     glutKeyboardUpFunc(KeyboardUpEvent);
@@ -40,7 +41,7 @@ Init(void)
 }
 
 int 
-main(int argv, char ** argc)
+main(int argc, char ** argv)
 {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_MULTISAMPLE);
