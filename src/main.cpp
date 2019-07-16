@@ -12,11 +12,6 @@
 #define WIDTH 800
 #define HEIGHT 600
 
-void
-Blit(int fps)
-{
-    glutTimerFunc(fps, Blit, fps);
-}
 
 void
 Init(void)
