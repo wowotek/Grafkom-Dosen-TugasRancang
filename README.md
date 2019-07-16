@@ -39,3 +39,49 @@ untuk melakukan kontribusi, ada beberapa hal yang perlu diketahui bebrapa dianta
 
 * **GNU Coding Standards** : https://www.gnu.org/prep/standards/standards.html
 * **Object Pascal / Delphi Style** : https://edn.embarcadero.com/article/10280
+
+Secara singkat berikut contoh gabungan dari kedua standard tersebut:
+
+```c++
+#include <iostream>     // semua library standard harus ada diatas library-
+#include <string.h>     // yang anda buat
+
+#include "control.h"    // library anda harus ada setelah library standard
+
+int exitCode = 0;       // nama variabel harus mengikuti gaya 'camelCase'
+
+void RenderDisplay(void);   // definisi Fungsi mengikuti gaya standar C
+
+void                    // tipe data implementasi fungsi harus ada diatas nama fungsi
+RenderDisplay(void)     // nama fungsi dan definisi parameter harus mengikuti-
+{                       // gaya Object-Pascal / Delphi
+      ...
+}
+
+template <typename T> struct    // tipe data, dan definisi template mengikuti gaya-
+vec2f_t {               // GNU Coding standard
+    T x, y;
+    ...  
+}
+
+int                     // mohon gunakan integer sebagai tipe data fungsi utama
+main(int argc, char ** argv)
+{
+    ...
+
+    return exitCode;
+}
+
+```
+
+### *Forking* dan *Cloning* Repository
+
+setelah memahami panduan Coding Style diatas, anda dapat mulai melakukan kontribusi dengan melakukan *Forking* lalu *Clone* dengan :
+
+1. Forking
+![Forking](.readme/fork.png)
+
+2. Cloning
+    ```bash
+    git clone https://github.com/wowotek/Grafkom-Dosen-TugasRancang
+    ```
