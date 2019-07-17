@@ -24,6 +24,7 @@
 ## Deskripsi Tugas
 
 > NOTE : Belum ada ketentuan dari dosen terkait. harap update ini segera setelah mendapatkan ketentuan resmi dari dosen terkait
+buat tugas susah pokoke
 
 ### Pembakuan
 
