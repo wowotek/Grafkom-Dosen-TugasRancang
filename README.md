@@ -79,10 +79,11 @@ main(int argc, char ** argv)
 
 setelah memahami panduan Coding Style diatas, anda dapat mulai melakukan kontribusi dengan melakukan *Forking* lalu *Clone* dengan :
 
-1. Forking
+1. **Forking**:
+fungsi forking adalah membuat branch baru dengan project baru pada akun personal anda, jadi tidak mengganggu project utama
 ![Forking](.readme/fork.png)
 
-2. Cloning
+2. **Cloning**
     ```bash
     git clone https://github.com/wowotek/Grafkom-Dosen-TugasRancang
     ```
