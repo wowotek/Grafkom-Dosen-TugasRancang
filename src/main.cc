@@ -6,8 +6,8 @@
 #include <GL/glut.h>
 #include <GL/freeglut.h>
 
-#include "control.hpp"
-#include "render.hpp"
+#include "control.hh"
+#include "render.hh"
 
 #define WIDTH 800
 #define HEIGHT 600

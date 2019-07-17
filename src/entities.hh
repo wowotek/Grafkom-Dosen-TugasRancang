@@ -6,7 +6,7 @@
 #include <GL/glut.h>
 #include <GL/freeglut.h>
 
-class Kotak{
+class Entities{
     private:
         float x, y;
         float ukuranKotak = 20;

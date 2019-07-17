@@ -5,7 +5,7 @@
 #include <GL/glut.h>
 #include <GL/freeglut.h>
 
-#include "entities.hpp"
+#include "entities.hh"
 
 Kotak k(50, 50);
 

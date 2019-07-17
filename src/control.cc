@@ -1,4 +1,4 @@
-#include "control.hpp"
+#include "control.hh"
 
 void
 MouseEvent(int, int, int, int)
