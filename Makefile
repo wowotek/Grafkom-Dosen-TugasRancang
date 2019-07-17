@@ -27,8 +27,11 @@ control.o: src/control.cpp src/control.hpp
 render.o: src/render.cpp src/render.hpp
 	${CC} ${CFLAGS} -c src/render.cpp -o ${of}/render.o
 
+entities.o: src/entities.cpp src/entities.hpp
+	${CC} ${CFLAGS} -c src/entities.cpp -o ${of}/entities.o
+
 main.o: src/main.cpp
 	${CC} ${CFLAGS} -c src/main.cpp -o ${of}/main.o
 
-${EXEC}: control.o render.o main.o
-	${CC} ${CFLAGS} control.o render.o main.o ${CDEPS} -o ${binf}/${EXEC}
+${EXEC}: control.o render.o entities.o main.o
+	${CC} ${CFLAGS} ${of}/control.o ${of}/render.o ${of}/entities.o ${of}/main.o ${CDEPS} -o ${binf}/${EXEC}
