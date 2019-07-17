@@ -9,20 +9,33 @@
 #include "control.hh"
 #include "render.hh"
 
+#include "common.hh"
+
 #define WIDTH 800
 #define HEIGHT 600
 
-
-void
-Init(void)
+int 
+main(int argc, char ** argv)
 {
+    vec2_t<float> pos1{10, 10};
+    vec2_t<double> pos2{5, 7};
+
+    pos1 = pos1 + pos2;
+
+    std::cout << pos1.x << pos1.y <<std::endl;
+
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_MULTISAMPLE);
+    glutInitWindowSize(WIDTH, HEIGHT);
+    glutInitWindowPosition(2280, 480);
+    glutCreateWindow("TUGAS 4 GRAFKOM");
+
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
 
     glutSetOption(GLUT_MULTISAMPLE, 16);
-
-    glEnable(GL_MULTISAMPLE);
     glHint(GL_MULTISAMPLE_FILTER_HINT_NV, GL_NICEST);
+    glEnable(GL_MULTISAMPLE);
 
     glutDisplayFunc(RenderDisplay);
 
@@ -30,21 +43,9 @@ Init(void)
     glutKeyboardFunc(KeyboardDownEvent);
     glutKeyboardUpFunc(KeyboardUpEvent);
 
-    Blit(1000/60);
-
     gluOrtho2D(0, glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT), 0);
-}
 
-int 
-main(int argc, char ** argv)
-{
-    glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_MULTISAMPLE);
-    glutInitWindowSize(WIDTH, HEIGHT);
-    glutInitWindowPosition(2280, 480);
-    glutCreateWindow("TUGAS 4 GRAFKOM");
-
-    Init();
+    Blit(1000/60);
 
     glutMainLoop();
     return 0;

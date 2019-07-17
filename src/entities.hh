@@ -6,14 +6,15 @@
 #include <GL/glut.h>
 #include <GL/freeglut.h>
 
-class Entities{
+class Entities
+{
     private:
         float x, y;
         float ukuranKotak = 20;
 
     public:
-        Kotak(float, float);
-        void GambarKotak(void);
+        Entities(float, float);
+        void DrawEntities(void);
 };
 
 #endif

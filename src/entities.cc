@@ -1,4 +1,4 @@
-#include "entities.hpp"
+#include "entities.hh"
 
 Entities::Entities(float init_x, float init_y)
 {

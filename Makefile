@@ -21,17 +21,17 @@ createfolder:
 
 # Compiling Related
 
-control.o: src/control.cpp src/control.hpp
-	${CC} ${CFLAGS} -c src/control.cpp -o ${of}/control.o
+control.o: src/control.cc src/control.hh
+	${CC} ${CFLAGS} -c src/control.cc -o ${of}/control.o
 
-render.o: src/render.cpp src/render.hpp
-	${CC} ${CFLAGS} -c src/render.cpp -o ${of}/render.o
+render.o: src/render.cc src/render.hh
+	${CC} ${CFLAGS} -c src/render.cc -o ${of}/render.o
 
-entities.o: src/entities.cpp src/entities.hpp
-	${CC} ${CFLAGS} -c src/entities.cpp -o ${of}/entities.o
+entities.o: src/entities.cc src/entities.hh
+	${CC} ${CFLAGS} -c src/entities.cc -o ${of}/entities.o
 
-main.o: src/main.cpp
-	${CC} ${CFLAGS} -c src/main.cpp -o ${of}/main.o
+main.o: src/main.cc
+	${CC} ${CFLAGS} -c src/main.cc -o ${of}/main.o
 
 ${EXEC}: control.o render.o entities.o main.o
 	${CC} ${CFLAGS} ${of}/control.o ${of}/render.o ${of}/entities.o ${of}/main.o ${CDEPS} -o ${binf}/${EXEC}

@@ -1,4 +1,4 @@
-#include "render.hpp"
+#include "render.hh"
 
 #include <GL/gl.h>
 #include <GL/glu.h>
@@ -7,12 +7,12 @@
 
 #include "entities.hh"
 
-Kotak k(50, 50);
+Entities k(50, 50);
 
 void
 RenderDisplay(void)
 {
-    k.GambarKotak();
+    k.DrawEntities();
     glutSwapBuffers();
 }
 
