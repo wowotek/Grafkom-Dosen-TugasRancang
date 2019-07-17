@@ -17,13 +17,6 @@
 int 
 main(int argc, char ** argv)
 {
-    vec2_t<float> pos1{10, 10};
-    vec2_t<double> pos2{5, 7};
-
-    pos1 = pos1 + pos2;
-
-    std::cout << pos1.x << pos1.y <<std::endl;
-
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_MULTISAMPLE);
     glutInitWindowSize(WIDTH, HEIGHT);

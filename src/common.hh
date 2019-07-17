@@ -1,6 +1,10 @@
 #ifndef COMMON_HH
 #define COMMON_HH
 
+#include <math.h>
+
+#define unpack2(vec2_t) vec2_t.x, vec2_t.y
+
 template <typename T> struct
 vec2_t
 {
@@ -72,6 +76,15 @@ vec2_t
         x *= s;
         y *= s;
     }
+
+    T magnitude()
+    {
+        return sqrt(x*x + y*y);
+    }
 };
+
+typedef vec2_t<float>   vec2f;
+typedef vec2_t<double>  vec2d;
+typedef vec2_t<int>     vec2i;
 
 #endif
