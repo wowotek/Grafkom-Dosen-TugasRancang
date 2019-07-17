@@ -101,7 +101,7 @@ main(int argc, char ** argv)
 Setiap Implementation File / Header file, diwajibkan menggunakan proteksi header
 
 berikut adalah contoh pada file **`makanan.hh`**
-```h
+```c++
 #ifndef MAKANAN_HH // Proteksi Header
 #define MAKANAN_HH // Buka Proteksi Header
 
@@ -145,7 +145,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 contoh tautan potongan lisensi pada file **`makanan.hh`**
 
-```h
+```c++
 /* Mendefinisikan class makanan dan metoda metoda penunjangnya
  * Copyright (C) 2019  Erlangga Ibrahim, Aurelia Gabriele
  * 
