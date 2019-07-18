@@ -67,6 +67,7 @@ Ketika membuat source file baru, mohon gunakan standard sebagai berikut:
 Secara singkat berikut contoh gabungan dari kedua standard tersebut:
 
 ```c++
+                                // Semua Comment harus sejajar dengan comment yang lain
 #include <iostream>             // semua library standard harus ada diatas library-
 #include <string.h>             // yang anda buat
 

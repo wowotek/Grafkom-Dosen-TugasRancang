@@ -9,8 +9,6 @@
 #include "control.hh"
 #include "render.hh"
 
-#include "common.hh"
-
 #define WIDTH 800
 #define HEIGHT 600
 
@@ -41,5 +39,7 @@ main(int argc, char ** argv)
     Blit(1000/60);
 
     glutMainLoop();
+
+
     return 0;
 }

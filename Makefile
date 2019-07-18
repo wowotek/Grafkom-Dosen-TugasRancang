@@ -27,11 +27,15 @@ control.o: src/control.cc src/control.hh
 render.o: src/render.cc src/render.hh
 	${CC} ${CFLAGS} -c src/render.cc -o ${of}/render.o
 
-entities.o: src/entities.cc src/entities.hh
-	${CC} ${CFLAGS} -c src/entities.cc -o ${of}/entities.o
+entity.o: src/entity.cc src/entity.hh
+	${CC} ${CFLAGS} -c src/entity.cc -o ${of}/entity.o
+
+game.o: src/game.cc src/game.hh
+	${CC} ${CFLAGS} -c src/game.cc -o ${of}/game.o
+
 
 main.o: src/main.cc
 	${CC} ${CFLAGS} -c src/main.cc -o ${of}/main.o
 
-${EXEC}: control.o render.o entities.o main.o
-	${CC} ${CFLAGS} ${of}/control.o ${of}/render.o ${of}/entities.o ${of}/main.o ${CDEPS} -o ${binf}/${EXEC}
+${EXEC}: control.o render.o entity.o game.o main.o
+	${CC} ${CFLAGS} ${of}/control.o ${of}/render.o ${of}/entity.o ${of}/game.o ${of}/main.o ${CDEPS} -o ${binf}/${EXEC}
