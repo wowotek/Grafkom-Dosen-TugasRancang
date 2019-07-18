@@ -54,6 +54,7 @@ Ketika membuat source file baru, mohon gunakan standard sebagai berikut:
     * *contoh :* __`entities.hh`__
   * jika lebih dari satu, kedua kata menggunakan huruf kecil, tanpa pemisah
     * *contoh :* __`makanankucing.hh`__
+
 ### Panduan *Coding Style*
 
 *Coding style* yang digunakan adalah gabungan dari **_GNU Coding Standards_** dan **_Object Pascal Style_** berikut penjabaran lebih lengkap mengenai kedua style tersebut :
@@ -101,6 +102,7 @@ main(int argc, char ** argv)
 Setiap Implementation File / Header file, diwajibkan menggunakan proteksi header
 
 berikut adalah contoh pada file **`makanan.hh`**
+
 ```c++
 #ifndef MAKANAN_HH // Proteksi Header
 #define MAKANAN_HH // Buka Proteksi Header
@@ -125,11 +127,11 @@ void Makanan::makan(Makanan makanan);
 
 Setiap File diwajibkan menautkan potongan lisensi berikut pada baris pertama pada file tersebut
 
-```
+```txt
 <Satu baris penjelasan singkat mengenai apa yang dilakukan file ini>
 Copyright (C) 2019  Erlangga Ibrahim, Aurelia Gabriele, <Nama Anda>
 
-This program is free software: you can redistribute it and/or modify
+This program is free software: you can redistribute it and/or modifyv
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
@@ -188,6 +190,7 @@ fungsi forking adalah membuat branch baru dengan project baru pada akun personal
 ![Forking](.readme/fork.png)
 
 2. **Cloning**
+
     ```bash
     git clone https://github.com/wowotek/Grafkom-Dosen-TugasRancang
     ```
