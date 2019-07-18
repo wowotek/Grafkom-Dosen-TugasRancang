@@ -3,6 +3,11 @@
 
 #include <math.h>
 
+
+#define ENTITY_SQUARE 0
+#define ENTITY_CIRCLE 1
+#define ENTITY_TRIANGLE 2
+
 #define unpack2(vec2_t) vec2_t.x, vec2_t.y
 
 template <typename T> struct

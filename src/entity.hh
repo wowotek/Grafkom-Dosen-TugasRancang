@@ -1,5 +1,5 @@
-#ifndef ENTITIES_HPP
-#define ENTITIES_HPP
+#ifndef ENTITY_HPP
+#define ENTITY_HPP
 
 #include <GL/gl.h>
 #include <GL/glu.h>
@@ -8,25 +8,23 @@
 
 #include "common.hh"
 
-#define ENTITIES_SQUARE 0
-#define ENTITIES_CIRCLE 1
-#define ENTITIES_TRINGALE 2
-
-class Entities
+class Entity
 {
     private:
         vec2f pos;
         int type;
+        int frame;
 
         void DrawSquare(void);
         void DrawEllipse(void);
         void DrawTriangle(void);
 
     public:
-        Entities(float, float, int);
-        Entities(vec2f, int);
+        Entity(float, float, int);
+        Entity(vec2f, int);
 
-        void DrawEntities(void);
+        void DrawEntity(void);
+        void UpdateEntity(void);
 };
 
 #endif
