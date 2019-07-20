@@ -1,5 +1,5 @@
 CC		= g++
-CFLAGS	= -W -Wall -Wextra
+CFLAGS	= -W -Wall -Wextra -Ilib/Box2D/
 CDEPS	= -lGL -lGLU -lglut
 
 binf	= build/bin

@@ -6,6 +6,8 @@
 #include <GL/glut.h>
 #include <GL/freeglut.h>
 
+#include <Box2D/Box2D.h>
+
 #include "control.hh"
 #include "render.hh"
 
