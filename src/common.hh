@@ -95,4 +95,6 @@ typedef vec2_t<float>   vec2f;
 typedef vec2_t<double>  vec2d;
 typedef vec2_t<int>     vec2i;
 
+#define printoutln(text) std::cout << text << std::endl; fflush(stdout); fflush_unlocked(stdout);
+
 #endif

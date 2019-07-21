@@ -32,9 +32,10 @@ entity.o: src/entity.cc src/entity.hh
 game.o: src/game.cc src/game.hh
 	${CC} ${CFLAGS} -c src/game.cc -o ${of}/game.o
 
-
 main.o: src/main.cc
 	${CC} ${CFLAGS} -c src/main.cc -o ${of}/main.o
+
+# Linking for TR.exec
 
 ${EXEC}: control.o render.o entity.o game.o main.o
 	${CC} ${CFLAGS} ${of}/control.o ${of}/render.o ${of}/entity.o ${of}/game.o ${of}/main.o lib/libBox2D.a ${CDEPS} -o ${binf}/${EXEC}

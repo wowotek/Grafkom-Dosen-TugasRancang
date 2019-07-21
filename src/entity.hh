@@ -9,39 +9,28 @@
 
 #include "common.hh"
 
-
 class Entity
 {
     private:
         vec2f pos;
         int type;
 
+        b2BodyDef bodyDef;
+        b2Body * body;
+        b2PolygonShape bodyShape;
+        b2FixtureDef fixtureDef;
+
         void DrawSquare(void);
         void DrawEllipse(void);
         void DrawTriangle(void);
 
-        void Init(void);
+        void InitPhysicalBody(b2World*, vec2f);
 
     public:
-        Entity(float, float, int);
-        Entity(vec2f, int);
+        Entity(float, float, int, b2World*);
+        Entity(vec2f, int, b2World*);
 
         void DrawEntity(void);
         void UpdateEntity(void);
 };
-
-class Body
-{
-    private:
-        b2BodyDef bodyDef;
-        b2Body* body;
-        b2PolygonShape box;
-        b2FixtureDef fixtureDef;
-
-        vec2f pos;
-    
-    public:
-        Body(b2World, int, int, vec2f, vec2f);
-};
-
 #endif

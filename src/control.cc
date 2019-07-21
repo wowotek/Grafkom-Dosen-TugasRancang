@@ -6,9 +6,11 @@
 #include "common.hh"
 
 void
-MouseEvent(int, int state, int x, int y)
+MouseEvent(int button, int state, int x, int y)
 {
-    if(state == 1) AddEntity(vec2f((float)(x), (float)(y)));
+    if(button == 0 && state == 1){
+        AddEntity(vec2f((float)(x), (float)(y)));
+    }
 }
 
 void

@@ -10,6 +10,7 @@
 
 #include "control.hh"
 #include "render.hh"
+#include "common.hh"
 
 #define WIDTH 800
 #define HEIGHT 600
@@ -17,13 +18,15 @@
 int 
 main(int argc, char ** argv)
 {
-    std::cout << "Program Launched" << std::endl << std::endl;
+    printoutln("Program Executed");
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_MULTISAMPLE);
     glutInitWindowSize(WIDTH, HEIGHT);
     glutInitWindowPosition(2280, 480);
+    printoutln("Glut Initialized, creating Window...");
     glutCreateWindow("TUGAS 4 GRAFKOM");
 
+    printoutln("Window Created, Configuring World...");
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
 
@@ -38,9 +41,13 @@ main(int argc, char ** argv)
     glutKeyboardUpFunc(KeyboardUpEvent);
 
     gluOrtho2D(0, glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT), 0);
+    
+    b2World world(b2Vec2(0.0f, 10.0f));
+    InitRenderer(&world);
 
+    printoutln("World Configured, Entering Main Loop..." << std::endl << std::endl);
+    
     Blit(1000/60);
-
     glutMainLoop();
 
 

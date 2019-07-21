@@ -3,16 +3,16 @@
 
 #include  "entity.hh"
 
-bool gravity = true;
-
-void
-SwitchGravity()
-{
-    gravity = !gravity;
-}
-
 int entityType = ENTITY_SQUARE;
 std::vector<Entity> entities;
+
+b2World * world;
+
+void
+InitGame(b2World * init_world)
+{
+    world = init_world;
+}
 
 void
 SetNewEntityType(int type)
@@ -23,7 +23,9 @@ SetNewEntityType(int type)
 void
 AddEntity(vec2f mpos)
 {
-    entities.push_back(Entity(mpos, entityType));
+    entities.push_back(
+        Entity(mpos, ENTITY_SQUARE, world)
+    );
 }
 
 void
@@ -36,8 +38,10 @@ RenderEntities()
 }
 
 void
-UpdateEntities()
+UpdateEntities(int)
 {
+    world->Step(1.0f/120.0f, 6, 2);
+
     for(unsigned int i = 0; i < entities.size(); i++)
     {
         entities.at(i).UpdateEntity();

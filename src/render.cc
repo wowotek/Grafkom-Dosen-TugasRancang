@@ -8,6 +8,12 @@
 #include "game.hh"
 
 void
+InitRenderer(b2World * world)
+{
+    InitGame(world);
+}
+
+void
 RenderDisplay(void)
 {
     glClearColor(1.0f, 1.00f, 1.00f, 1.00f);
@@ -21,8 +27,8 @@ RenderDisplay(void)
 void
 Blit(int fps)
 {
-    UpdateEntities();
+    UpdateEntities(fps);
 
     glutPostRedisplay();
-    glutTimerFunc(fps, Blit, fps);
+    glutTimerFunc(fps, Blit, 0);
 }
