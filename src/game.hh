@@ -8,6 +8,6 @@ void InitGame(b2World *);
 void SetNewEntityType(int);
 void AddEntity(vec2f);
 void RenderEntities();
-void UpdateEntities(int);
+void UpdateEntities();
 
 #endif

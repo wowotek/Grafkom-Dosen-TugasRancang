@@ -22,7 +22,7 @@ main(int argc, char ** argv)
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_MULTISAMPLE);
     glutInitWindowSize(WIDTH, HEIGHT);
-    glutInitWindowPosition(2280, 480);
+    glutInitWindowPosition(400, 200);
     printoutln("Glut Initialized, creating Window...");
     glutCreateWindow("TUGAS 4 GRAFKOM");
 
@@ -42,12 +42,12 @@ main(int argc, char ** argv)
 
     gluOrtho2D(0, glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT), 0);
     
-    b2World world(b2Vec2(0.0f, 10.0f));
+    b2World world(b2Vec2(0.0f, 0.982f));
     InitRenderer(&world);
 
     printoutln("World Configured, Entering Main Loop..." << std::endl << std::endl);
     
-    Blit(1000/60);
+    Blit(0);
     glutMainLoop();
 
 

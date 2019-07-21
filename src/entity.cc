@@ -28,45 +28,42 @@ Entity::InitPhysicalBody(b2World * world, vec2f pos)
 
     if (type == ENTITY_TRIANGLE)      // TRIANGLE
     {
-        printoutln("TRIANGLE");
         b2Vec2 vertices[] = {
-            b2Vec2(pos.x, pos.y - 10),
-            b2Vec2(pos.x - 10, pos.y + 10),
-            b2Vec2(pos.x + 10, pos.y + 10)
+            b2Vec2(0, -10),
+            b2Vec2(-10, 10),
+            b2Vec2(10, 10)
         };
 
         bodyShape.Set(vertices, 3);
     } else
     if (type == ENTITY_CIRCLE)        // CIRCLE
     {
-        printoutln("CIRCLE");
         b2Vec2 vertices[360];
 
         float angleIncrement = (360.0f / 360) * M_PI / 180.0f;
         float angle = 0.0f;
         for (size_t _k = 0; _k < 360; ++_k) {
-            vertices[_k] = b2Vec2(pos.x + (10 * cos(angle)), pos.y + (10 * sin(angle)));
+            vertices[_k].Set((10 * cos(angle)), (10 * sin(angle)));
             angle += angleIncrement;
         }
 
         bodyShape.Set(vertices, 360);
     } else                                  // SQUARE
     {
-        printoutln("SQUARE");
         b2Vec2 vertices[] = {
-            b2Vec2(pos.x - 10, pos.y - 10),
-            b2Vec2(pos.x - 10, pos.y + 10),
-            b2Vec2(pos.x + 10, pos.y + 10),
-            b2Vec2(pos.x + 10, pos.y - 10)
+            b2Vec2(-10, -10),
+            b2Vec2(-10, 10),
+            b2Vec2(10, 10),
+            b2Vec2(10, -10)
         };
 
         bodyShape.Set(vertices, 4);
     }
 
     fixtureDef.shape = &bodyShape;
-    fixtureDef.density = 1.0f;
-    fixtureDef.friction = 0.3f;
-
+    fixtureDef.density = 0.01f;
+    fixtureDef.friction = 0.0f;
+    fixtureDef.restitution = 0.3f;
     body->CreateFixture(&fixtureDef);
 }
 

@@ -1,5 +1,8 @@
 #include "render.hh"
 
+#include <iostream>
+#include <chrono>
+
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
@@ -7,10 +10,13 @@
 
 #include "game.hh"
 
+b2World * Rworld;
+
 void
-InitRenderer(b2World * world)
+InitRenderer(b2World * init_world)
 {
-    InitGame(world);
+    Rworld = init_world;
+    InitGame(Rworld);
 }
 
 void
@@ -24,11 +30,22 @@ RenderDisplay(void)
     glutSwapBuffers();
 }
 
+auto start = std::chrono::high_resolution_clock::now();
 void
-Blit(int fps)
+Blit(int)
 {
-    UpdateEntities(fps);
+    Rworld->Step(1.0f/60.0f, 1, 1);
+    Rworld->DrawDebugData();
+    UpdateEntities();
 
     glutPostRedisplay();
-    glutTimerFunc(fps, Blit, 0);
+
+    auto finish = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> elapsed = finish - start;
+    start = std::chrono::high_resolution_clock::now();
+    std::cout << "Last Update : " << elapsed.count() << "                                        \r";
+    fflush(stdout);
+
+    //Rworld->ClearForces();
+    glutTimerFunc(0, Blit, 0);
 }

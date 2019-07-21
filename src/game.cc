@@ -7,11 +7,21 @@ int entityType = ENTITY_SQUARE;
 std::vector<Entity> entities;
 
 b2World * world;
+b2BodyDef groundBodyDef;
+b2Body * groundBody;
+b2PolygonShape groundBox;
 
 void
 InitGame(b2World * init_world)
 {
     world = init_world;
+
+    groundBodyDef.position.Set(0.0f, 600.0f);
+
+    groundBody = world->CreateBody(&groundBodyDef);
+
+    groundBox.SetAsBox(12000.0f, 10.0f);
+    groundBody->CreateFixture(&groundBox, 0.0f);
 }
 
 void
@@ -24,7 +34,7 @@ void
 AddEntity(vec2f mpos)
 {
     entities.push_back(
-        Entity(mpos, ENTITY_SQUARE, world)
+        Entity(mpos, entityType, world)
     );
 }
 
@@ -38,10 +48,8 @@ RenderEntities()
 }
 
 void
-UpdateEntities(int)
+UpdateEntities()
 {
-    world->Step(1.0f/120.0f, 6, 2);
-
     for(unsigned int i = 0; i < entities.size(); i++)
     {
         entities.at(i).UpdateEntity();
