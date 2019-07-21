@@ -1,5 +1,6 @@
 # project related
 build/
+lib/Box2D
 
 # Prerequisites
 *.d
