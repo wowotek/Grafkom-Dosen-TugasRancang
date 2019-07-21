@@ -8,6 +8,9 @@
 #define ENTITY_CIRCLE 1
 #define ENTITY_TRIANGLE 2
 
+#define BODY_STATIC 0
+#define BODY_DYNAMIC 1
+
 #define unpack2(vec2_t) vec2_t.x, vec2_t.y
 
 template <typename T> struct
