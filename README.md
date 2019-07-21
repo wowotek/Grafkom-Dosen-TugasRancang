@@ -30,9 +30,89 @@ buat tugas susah pokoke
 
 > NOTE : Belum ada ketentuan dari dosen terkait. harap update ini segera setelah mendapatkan ketentuan resmi dari dosen terkait
 
+## Kompilasi
+
+### Cloning
+
+Clone repo ini dengan cara :
+
+```bash
+git clone https://github.com/wowotek/Grafkom-Dosen-TugasRancang
+```
+
+### Dependencies
+Tugas Rancang ini memiliki kebutuhan library external yaitu:
+  * freeglut3
+  * freeglut3-dev
+  * make
+  * Box2D
+
+sebelum melakukan kompilasi, harap penuhi kebutuhan library tersebut
+#### Freeglut dan Make
+
+##### Ubuntu
+
+```bash
+sudo apt install freeglut3 freeglut3-dev make
+```
+
+##### Windows
+
+> TODO : Fill this section about how to install GLUT in windows
+
+#### Box2D
+1. __Pindah__ Folder kerja ke repo ini. **_contoh :_**
+
+    ```bash
+    cd Grafkom-Dosen-TugasRancang
+    ```
+
+2. __Inisialisasi__ dependencies library
+
+    ```bash
+    git submodule init
+    ```
+
+3. __Update__ dan __Clone__ dependencies tersebut
+
+    ```bash
+    git submodules update
+    ```
+
+### Kompilasi
+
+#### Ubuntu
+
+1. Buka terminal dengan
+
+    __`CTRL` + `ALT` + `T`__
+
+2. Compile menggunakan Make
+
+    ```bash
+    make all
+    ```
+
+#### Windows
+
+> TODO : Fill this section about how to compile in windows
+
+### Eksekusi Program
+file yang telah dicompile berada pada **`build/bin/`**
+
+#### Ubuntu
+
+```bash
+./build/bin/TR.exec
+```
+
+#### Windows
+
+> TODO : Fill this section about how to run executable in windows
+
 ## Kontribusi
 
-untuk melakukan kontribusi, ada beberapa hal yang perlu diketahui bebrapa diantaranya adalah :
+untuk melakukan kontribusi, ada beberapa hal yang perlu diketahui beberapa diantaranya adalah :
 
 ### Panduan Penamaan File
 
@@ -195,3 +275,4 @@ fungsi forking adalah membuat branch baru dengan project baru pada akun personal
     ```bash
     git clone https://github.com/wowotek/Grafkom-Dosen-TugasRancang
     ```
+
