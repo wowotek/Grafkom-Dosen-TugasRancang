@@ -17,6 +17,7 @@
 int 
 main(int argc, char ** argv)
 {
+    std::cout << "Program Launched" << std::endl << std::endl;
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_MULTISAMPLE);
     glutInitWindowSize(WIDTH, HEIGHT);

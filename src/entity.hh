@@ -5,19 +5,22 @@
 #include <GL/glu.h>
 #include <GL/glut.h>
 #include <GL/freeglut.h>
+#include <Box2D/Box2D.h>
 
 #include "common.hh"
+
 
 class Entity
 {
     private:
         vec2f pos;
         int type;
-        int frame;
 
         void DrawSquare(void);
         void DrawEllipse(void);
         void DrawTriangle(void);
+
+        void Init(void);
 
     public:
         Entity(float, float, int);
@@ -25,6 +28,20 @@ class Entity
 
         void DrawEntity(void);
         void UpdateEntity(void);
+};
+
+class Body
+{
+    private:
+        b2BodyDef bodyDef;
+        b2Body* body;
+        b2PolygonShape box;
+        b2FixtureDef fixtureDef;
+
+        vec2f pos;
+    
+    public:
+        Body(b2World, int, int, vec2f, vec2f);
 };
 
 #endif
