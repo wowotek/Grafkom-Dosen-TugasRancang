@@ -1,5 +1,5 @@
 CC		= g++
-CFLAGS	= -W -Wall -Wextra -Ilib/Box2D/
+CFLAGS	= -W -Wall -Wextra -Ilib/
 CDEPS	= -lGL -lGLU -lglut
 
 binf	= build/bin
@@ -9,17 +9,16 @@ EXEC	= TR.exec
 
 # Prerequisite for project build folder
 
-all: cleanfolder createfolder ${EXEC}
-
-cleanfolder:
-	@rm -rf build/
-
-createfolder:
-	@mkdir -p build/bin/
-	@mkdir -p build/o/
-
+all: rmfolder mkfolder ${EXEC}
 
 # Compiling Related
+
+rmfolder:
+	@rm -rf build/
+
+mkfolder:
+	@mkdir -p build/bin/
+	@mkdir -p build/o/
 
 control.o: src/control.cc src/control.hh
 	${CC} ${CFLAGS} -c src/control.cc -o ${of}/control.o
@@ -38,4 +37,4 @@ main.o: src/main.cc
 	${CC} ${CFLAGS} -c src/main.cc -o ${of}/main.o
 
 ${EXEC}: control.o render.o entity.o game.o main.o
-	${CC} ${CFLAGS} ${of}/control.o ${of}/render.o ${of}/entity.o ${of}/game.o ${of}/main.o ${CDEPS} -o ${binf}/${EXEC}
+	${CC} ${CFLAGS} ${of}/control.o ${of}/render.o ${of}/entity.o ${of}/game.o ${of}/main.o lib/libBox2D.a ${CDEPS} -o ${binf}/${EXEC}
