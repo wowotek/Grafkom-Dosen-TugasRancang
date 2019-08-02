@@ -1,6 +1,7 @@
 CC 		= clang++
-CFLAGS 	= -W -pedantic -Wall -Wextra -Werror
-CDEPS	= -lGL -lGLU -lGLUT
+CCOMP	= -O3
+CFLAGS 	= -W -pedantic -Wall -Wextra -Werror -Ilib/Box2D/
+CDEPS	= -lGL -lGLU -lglut
 
 EXEC	= dosenTR.app
 
@@ -12,14 +13,19 @@ OREQ	= main.o
 all: build run
 
 run:
+	@echo ""
+	@echo "[MAKE] running $(EXEC)"
+	@echo ""
 	@cd build/bin/ && ./$(EXEC)
 
-build: clean create buildnotice $(EXEC)
+build: preparation buildnotice $(EXEC)
 	@echo "[MAKE] project built successfuly !"
 	@echo ""
 
 buildnotice:
 	@echo "[MAKE] building projects..."
+
+preparation: clean create cpbox2d 
 
 create:
 	@echo "[MAKE] creating build folder..."
@@ -34,10 +40,47 @@ clean:
 	@rm -rf build/
 	@echo ""
 
+# BOX2D RELATED
+
+dlbox2d:
+	@echo "[MAKE] cloning Box2D"
+	@echo "[MAKE]    | checking if Box2D has been cloned..."
+ifeq (,$(wildcard ./lib/Box2D/Box2D/Box2D.h))
+	@echo "[MAKE]    | Box2D is not cloned. Cloning..."
+	@cd lib/ && git clone https://github.com/wowotek/Box2D
+else
+	@echo "[MAKE]    | Box2D is cloned. Skipping..."
+endif
+	@echo ""
+
+makebox2d: dlbox2d
+	@echo "[MAKE] building Box2D Static Library..."
+	@echo "[MAKE]    | checking compiled static library : ./lib/Box2D/Build/bin/x86_64/Debug/libBox2D.a"
+ifeq (,$(wildcard ./lib/Box2D/Build/bin/x86_64/Debug/libBox2D.a))
+	@echo "[MAKE]    | static library is not built yet, Compiling..."
+	@make -C lib/Box2D/Build -s
+else
+	@echo "[MAKE]    | static library has been compiled! skipping...."
+endif
+	@echo ""
+
+cpbox2d: makebox2d
+	@echo "[MAKE] copying Box2D Static Library..."
+	@echo "[MAKE]    | checking static library at : lib/Box2D/Build/bin/x86_64/Debug/libBox2D.a"
+ifeq (,$(wildcard ./lib/libBox2D.a))
+	@echo "[MAKE]    | static library doesn't Exist, copying from Box2D build folder to lib/libBox2D.a"
+	@cp lib/Box2D/Build/bin/x86_64/Debug/libBox2D.a lib/
+else
+	@echo "[MAKE]    | Box2D static library exist! skipping..."
+endif
+	@echo ""
+
+# -------------
+
 main.o: src/main.cc
 	@echo "[MAKE]    | compiling main.o"
 	@$(CC) $(CFLAGS) -c src/main.cc -o $(OBJ)/main.o
 
 $(EXEC): $(OREQ)
 	@echo "[MAKE]    | building executables [$(OREQ)]"
-	@$(CC) $(CFLAGS) $(OBJ)/main.o $(CDEPS) -o $(BIN)/$(EXEC)
+	@$(CC) $(CFLAGS) $(OBJ)/main.o lib/libBox2D.a $(CDEPS) $(CCOMP) -o $(BIN)/$(EXEC)
