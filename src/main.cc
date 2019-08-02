@@ -3,7 +3,7 @@
 #include <GL/glut.h>
 #include <cmath>
 
-void lingkaran(float TITIK_LAYAR_X, float TITIK_LAYAR_Y, float LEBAR_X, float LEBAR_Y, float JUMLAH_SUDUT, float ROTASI)
+void Poly(float TITIK_LAYAR_X, float TITIK_LAYAR_Y, float LEBAR_X, float LEBAR_Y, float JUMLAH_SUDUT, float ROTASI)
 {
     GLfloat derajat = (360.0f / JUMLAH_SUDUT) * M_PI / 180.0f;
     glBegin(GL_LINE_LOOP);
@@ -14,7 +14,6 @@ void lingkaran(float TITIK_LAYAR_X, float TITIK_LAYAR_Y, float LEBAR_X, float LE
             sudut += derajat;
         }
     glEnd();
-
 }
 
 void myDisplay()
