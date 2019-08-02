@@ -3,19 +3,6 @@
 #include <GL/glut.h>
 #include <cmath>
 
-void Poly(float TITIK_LAYAR_X, float TITIK_LAYAR_Y, float LEBAR_X, float LEBAR_Y, float JUMLAH_SUDUT, float ROTASI)
-{
-    GLfloat derajat = (360.0f / JUMLAH_SUDUT) * M_PI / 180.0f;
-    glBegin(GL_LINE_LOOP);
-        GLfloat sudut = 0.0f - ROTASI;
-        for (int _k = 0; _k < JUMLAH_SUDUT; ++_k)
-		{
-            glVertex2f(TITIK_LAYAR_X + (LEBAR_X * cos(sudut)), TITIK_LAYAR_Y + (LEBAR_Y * sin(sudut)));
-            sudut += derajat;
-        }
-    glEnd();
-}
-
 void myDisplay()
 {
     glClear(GL_COLOR_BUFFER_BIT);
