@@ -1,6 +1,6 @@
 CC 		= clang++
 CCOMP	= -O3
-CFLAGS 	= -W -pedantic -Wall -Wextra -Werror -Ilib/Box2D/
+CFLAGS 	= -Ilib/Box2D/ #-W -pedantic -Wall -Wextra -Werror 
 CDEPS	= -lGL -lGLU -lglut
 
 EXEC	= dosenTR.app
@@ -8,7 +8,7 @@ EXEC	= dosenTR.app
 OBJ		= build/o
 BIN		= build/bin
 
-OREQ	= main.o
+OREQ	= shape.o entity.o main.o
 
 all: build run
 
@@ -77,10 +77,18 @@ endif
 
 # -------------
 
+shape.o: src/shape.cc src/shape.hh
+	@echo "[MAKE]    | compiling shape.o"
+	@$(CC) $(CFLAGS) -c src/shape.cc -o $(OBJ)/shape.o
+
+entity.o: src/entity.cc src/entity.hh
+	@echo "[MAKE]    | compiling shape.o"
+	@$(CC) $(CFLAGS) -c src/entity.cc -o $(OBJ)/entity.o
+
 main.o: src/main.cc
 	@echo "[MAKE]    | compiling main.o"
 	@$(CC) $(CFLAGS) -c src/main.cc -o $(OBJ)/main.o
 
 $(EXEC): $(OREQ)
 	@echo "[MAKE]    | building executables [$(OREQ)]"
-	@$(CC) $(CFLAGS) $(OBJ)/main.o lib/libBox2D.a $(CDEPS) $(CCOMP) -o $(BIN)/$(EXEC)
+	@$(CC) $(CFLAGS) $(OBJ)/shape.o $(OBJ)/entity.o $(OBJ)/main.o lib/libBox2D.a $(CDEPS) $(CCOMP) -o $(BIN)/$(EXEC)

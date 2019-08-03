@@ -4,44 +4,58 @@
 #include <cmath>
 
 #include "shape.hh"
+#include "entity.hh"
 
-void myDisplay()
+#define WINDOW_WIDTH 800
+#define WINDOW_HEIGHT 600
+
+float windowWidth = WINDOW_WIDTH;
+float windowHeight = WINDOW_HEIGHT;
+
+void
+RenderScreen()
 {
+    glClearColor(1, 1, 1, 1);
     glClear(GL_COLOR_BUFFER_BIT);
-    glBegin(GL_LINE_LOOP);
-        glColor3f(1.0, 1.0, 0);
-        glVertex2i(15, 40);
-        glVertex2i(30, 40);
-        glVertex2i(30, 60);
-        glVertex2i(15, 60);
-    glEnd();
+    glMatrixMode(GL_MODELVIEW);
+    glPointSize(5);
 
-    glBegin(GL_LINE_LOOP);
-        glColor3f(1, 0, 0);
-        glVertex2i(40, 40);
-        glVertex2i(55, 40);
-        glVertex2i(47, 60);
+    glColor3f(1, 0, 0);
+    glBegin(GL_POLYGON);
+        glVertex2f(1, 1);
+        glVertex2f(1, 2);
+        glVertex2f(2, 2);
+        glVertex2f(2, 1);
     glEnd();
-
-    // glColor3f(0, 1, 0);
-    // for(int i = 0; i < 35; i++)
-	// {
-	// 	lingkaran(20, 25, 20, 20, 1000, 20);
-	// }
 
     glutSwapBuffers();
 }
 
-int main(int argc, char** argv)
+void
+OnWindowReshape(int newWidth, int newHeight)
+{
+    glViewport(0, 0, newWidth, newHeight);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(
+        0, (float)(newWidth)/(float)(WINDOW_WIDTH) * 10,
+        (float)(newHeight)/(float)(WINDOW_WIDTH) * 10, 0
+    );
+
+    windowWidth = newWidth;
+    windowHeight = newHeight;
+}
+
+int
+main(int argc, char** argv)
 {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
-    glutInitWindowSize(800, 600);
+    glutInitWindowSize(windowWidth, windowHeight);
     glutCreateWindow("Tugas Rancang Dosen");
-    glLineWidth(5.0);
-    glutDisplayFunc(myDisplay);
-    gluOrtho2D(0, 100, 0, 100);
-    glClearColor(1, 1, 1, 1);
+    
+    glutDisplayFunc(RenderScreen);
+    glutReshapeFunc(OnWindowReshape);
 
     glutMainLoop();
 
