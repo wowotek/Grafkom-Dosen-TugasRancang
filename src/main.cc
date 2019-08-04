@@ -6,6 +6,7 @@
 
 #include "shape.hh"
 #include "entity.hh"
+#include "control.hh"
 
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
@@ -13,13 +14,9 @@
 float windowWidth = WINDOW_WIDTH;
 float windowHeight = WINDOW_HEIGHT;
 
-b2Vec2 gravity(0.0f, 9.82f);
+b2Vec2 gravity(0.0f, 1.6f);
 b2World world(gravity);
-
-Entity e1(
-    b2Vec2(1, 1), 0.25, 
-    CIRCLE, &world
-);
+std::vector<Entity> entities;
 
 void
 RenderScreen()
@@ -28,9 +25,22 @@ RenderScreen()
     glClear(GL_COLOR_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
 
-    e1.DrawEntity();
+    for(size_t i=0; i<entities.size(); i++)
+    {
+        entities.at(i).DrawEntity();
+    }
 
     glutSwapBuffers();
+}
+
+void
+Blit(int rate)
+{
+    world.Step((1.0f/60.0f), 10, 10);
+
+    glutSwapBuffers();
+    glutPostRedisplay();
+    glutTimerFunc(rate, Blit, rate);
 }
 
 void
@@ -40,8 +50,8 @@ OnWindowReshape(int newWidth, int newHeight)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluOrtho2D(
-        0, (float)(newWidth)/(float)(WINDOW_WIDTH) * 10,
-        (float)(newHeight)/(float)(WINDOW_WIDTH) * 10, 0
+        0, ((float)(newWidth)/(float)(WINDOW_WIDTH) * 10),
+        ((float)(newHeight)/(float)(WINDOW_WIDTH) * 10), 0
     );
 
     windowWidth = newWidth;
@@ -49,31 +59,59 @@ OnWindowReshape(int newWidth, int newHeight)
 }
 
 void
-Blit(int rate)
+InitializeStaticBodies()
 {
-    world.Step((1.0f/60.0f), 4, 6);
-    b2Vec2 pos = e1.body->GetPosition();
+    /* Bottom Floor */ {
+        b2BodyDef bottomBodyDef;
+        bottomBodyDef.position.Set(-10.0f, ((float)(windowHeight)/(float)(WINDOW_WIDTH) * 10)+1.0);
+        b2Body * bottomBody = world.CreateBody(&bottomBodyDef);
+        b2PolygonShape bottomBodyShape;
+        bottomBodyShape.SetAsBox(200, 1.0f);
+        bottomBody->CreateFixture(&bottomBodyShape, 0.0f);
+    }
+    /* Top Ceiling */ {
+        b2BodyDef topBodyDef;
+        topBodyDef.position.Set(-10.0f, -1);
+        b2Body * topBody = world.CreateBody(&topBodyDef);
+        b2PolygonShape topBodyShape;
+        topBodyShape.SetAsBox(200, 1.0f);
+        topBody->CreateFixture(&topBodyShape, 0.0f);
+    }
 
-    //std::cout << pos.x << " " << pos.y << std::endl;
-    glutSwapBuffers();
-    glutPostRedisplay();
-    glutTimerFunc(rate, Blit, rate);
+    /* Left Wall */ {
+        b2BodyDef leftBodyDef;
+        leftBodyDef.position.Set(0, 0);
+        b2Body * leftBody = world.CreateBody(&leftBodyDef);
+        b2PolygonShape leftBodyShape;
+
+        b2Vec2 leftWallVertices[4] = {
+            b2Vec2(0, 0),
+            b2Vec2(-1, 0),
+            b2Vec2(-1, ((float)(windowHeight)/(float)(WINDOW_WIDTH) * 10)),
+            b2Vec2(0, ((float)(windowHeight)/(float)(WINDOW_WIDTH) * 10))
+        };
+
+        leftBodyShape.Set(leftWallVertices, 4);
+        leftBody->CreateFixture(&leftBodyShape, 0.0f);
+    }
+
+    /* Right Wall */ {
+        b2BodyDef leftBodyDef;
+        leftBodyDef.position.Set(0, 0);
+        b2Body * leftBody = world.CreateBody(&leftBodyDef);
+        b2PolygonShape leftBodyShape;
+
+        b2Vec2 leftWallVertices[4] = {
+            b2Vec2(0, 0),
+            b2Vec2(-1, 0),
+            b2Vec2(-1, ((float)(windowHeight)/(float)(WINDOW_WIDTH) * 10)),
+            b2Vec2(0, ((float)(windowHeight)/(float)(WINDOW_WIDTH) * 10))
+        };
+
+        leftBodyShape.Set(leftWallVertices, 4);
+        leftBody->CreateFixture(&leftBodyShape, 0.0f);
+    }
 }
-
-// void myMouse (int button, int state, int mousex, int mousey)
-// {
-// 	if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
-// 	{
-// 		koordinat mouseKoord;
-
-// 		mouseKoord.x = mousex;
-// 		mouseKoord.y = 600 - mousey;
-// 		data_koordinat.push_back(mouseKoord);
-// 	}
-
-// 	glutPostRedisplay();
-// }
-
 
 int
 main(int argc, char** argv)
@@ -84,19 +122,19 @@ main(int argc, char** argv)
     glutCreateWindow("Tugas Rancang Dosen");
     
     glutDisplayFunc(RenderScreen);
-    glutReshapeFunc(OnWindowReshape); 
+    glutReshapeFunc(OnWindowReshape);
+
+    InitControl(&entities, &world, &windowWidth, &windowHeight);
+
+    glutKeyboardFunc(KeyboardDownHandler);
+    glutMouseFunc(MouseDownHandler);
+
     glutTimerFunc(0, Blit, 16);
 
-    SetShapesDrawMode(GL_TRIANGLE_FAN);
-    b2BodyDef gbd;
-    gbd.position.Set(4.0f, ((float)(windowHeight)/(float)(WINDOW_WIDTH) * 10));
-    
-    b2Body * gb = world.CreateBody(&gbd);
-    b2PolygonShape gbp;
-    gbp.SetAsBox(1, 0.1f);
+    SetShapesDrawMode(GL_LINE_LOOP);
 
-    gb->CreateFixture(&gbp, 0.0f);
-    
+    InitializeStaticBodies();
+
     glutMainLoop();
 
     return 0;

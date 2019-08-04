@@ -10,6 +10,7 @@ SetShapesDrawMode(uint mode)
 {
     DRAWMODE = mode;
 }
+
 void
 Square(b2Vec2 pos, float size, float angle)
 {
@@ -53,6 +54,7 @@ Triangle(b2Vec2 pos, float size, float angle)
         glVertex2f(pos.x, pos.y);
     glEnd();
 }
+
 void
 Circle(b2Vec2 pos, float size, float angle)
 {
