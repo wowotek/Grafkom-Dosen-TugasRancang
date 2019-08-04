@@ -1,22 +1,83 @@
-#include "shape.hh"
-
+#include <iostream>
 #include <GL/glut.h>
 
+#include "shape.hh"
+
+uint DRAWMODE = GL_LINE_LOOP;
+
 void
-Shapes::Polygons(b2Vec2 pos, b2Vec2 size, float cornerCount, float angle)
+SetShapesDrawMode(uint mode)
 {
-    Shapes::Polygons(pos.x, pos.y, size.x, size.y, cornerCount, angle);
+    DRAWMODE = mode;
+}
+void
+Square(b2Vec2 pos, float size, float angle)
+{
+    float step = ((2.0f * M_PI) / static_cast<float>(4));
+    angle = angle - (0.25 * M_PI);
+
+    glColor3f(0.8, 0, 0);
+    glBegin(DRAWMODE);
+    for(uint8 i = 0; i < 4; ++i){
+        glVertex2f(
+            pos.x + cos((i * step)+angle) * size,
+            pos.y + sin((i * step)+angle) * size
+        );
+    }
+    glEnd();
+
+    glPointSize(5);
+    glBegin(GL_POINTS);
+        glVertex2f(pos.x, pos.y);
+    glEnd();
 }
 
 void
-Shapes::Polygons(float posX, float posY, float sizeX, float sizeY, float cornerCount, float angle)
+Triangle(b2Vec2 pos, float size, float angle)
 {
-    glBegin(GL_LINE_LOOP);
-        float _angle = (0.0f - cornerCount) + angle;
-        for (int _k = 0; _k < cornerCount; ++_k)
-		{
-            glVertex2f(posX + (sizeX * cos(_angle)), posY + (sizeY * sin(_angle)));
-            _angle += (360.0f / cornerCount) * M_PI / 180.0f;
+    float step = ((2.0f * M_PI) / static_cast<float>(3));
+    angle = angle - (0.5 * M_PI);
+
+    glColor3f(0.8, 0, 0);
+    glBegin(DRAWMODE);
+    for(uint8 i = 0; i < 3; ++i){
+        glVertex2f(
+            pos.x + cos((i * step)+angle) * size,
+            pos.y + sin((i * step)+angle) * size
+        );
+    }
+    glEnd();
+
+    glPointSize(5);
+    glBegin(GL_POINTS);
+        glVertex2f(pos.x, pos.y);
+    glEnd();
+}
+void
+Circle(b2Vec2 pos, float size, float angle)
+{
+    float step = ((2.0f * M_PI) / static_cast<float>(360));
+
+    glColor3f(1, 0, 0);
+    glBegin(DRAWMODE);
+    for(uint16 i = 0; i < 360; ++i){
+        glVertex2f(
+            pos.x + cos((i * step)+angle) * size,
+            pos.y + sin((i * step)+angle) * size
+        );
+    }
+    glEnd();
+
+    glColor3f(0, 1, 0);
+    glBegin(DRAWMODE);
+    glVertex2f(pos.x, pos.y);
+    for(uint16 i = 0; i < 360; ++i){
+        if(i >= 0 && i <= 11){
+            glVertex2f(
+                pos.x + cos((i * step)+angle) * size,
+                pos.y + sin((i * step)+angle) * size
+            );
         }
+    }
     glEnd();
 }

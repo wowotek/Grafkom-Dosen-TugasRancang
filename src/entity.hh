@@ -3,18 +3,31 @@
 
 #include <Box2D/Box2D.h>
 
+enum EntityType{
+    SQUARE,
+    TRIANGLE,
+    CIRCLE
+};
+
 class Entity {
     private:
         b2BodyDef bodyDef;
-        b2Body* body;
-        b2PolygonShape dynamicBox;
+
+        b2PolygonShape polygonShape;
+        b2CircleShape circleShape;
+
         b2FixtureDef fixtureDef;
 
         b2Vec2 pos;
+        float size;
+        EntityType type;
 
     public:
-        Entity(b2Vec2, b2Vec2, b2World *);
-        Entity(float32, float32, float32, float32, b2World *);
+        b2Body* body;
+
+        Entity(b2Vec2, float, EntityType, b2World *);
+
+        void DrawEntity();
 };
 
 #endif

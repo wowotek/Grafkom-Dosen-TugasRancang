@@ -1,7 +1,8 @@
+#include <iostream>
+
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
-#include <cmath>
 
 #include "shape.hh"
 #include "entity.hh"
@@ -12,21 +13,23 @@
 float windowWidth = WINDOW_WIDTH;
 float windowHeight = WINDOW_HEIGHT;
 
+b2Vec2 gravity(0.0f, 9.82f);
+b2World world(gravity);
+
+Entity e1(
+    b2Vec2(1, 1), 0.25, 
+    CIRCLE, &world
+);
+
+
 void
 RenderScreen()
 {
     glClearColor(1, 1, 1, 1);
     glClear(GL_COLOR_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
-    glPointSize(5);
 
-    glColor3f(1, 0, 0);
-    glBegin(GL_POLYGON);
-        glVertex2f(1, 1);
-        glVertex2f(1, 2);
-        glVertex2f(2, 2);
-        glVertex2f(2, 1);
-    glEnd();
+    e1.DrawEntity();
 
     glutSwapBuffers();
 }
@@ -46,6 +49,18 @@ OnWindowReshape(int newWidth, int newHeight)
     windowHeight = newHeight;
 }
 
+void
+Blit(int rate)
+{
+    world.Step((1.0f/60.0f), 4, 6);
+    b2Vec2 pos = e1.body->GetPosition();
+
+    //std::cout << pos.x << " " << pos.y << std::endl;
+    glutSwapBuffers();
+    glutPostRedisplay();
+    glutTimerFunc(rate, Blit, rate);
+}
+
 int
 main(int argc, char** argv)
 {
@@ -55,7 +70,18 @@ main(int argc, char** argv)
     glutCreateWindow("Tugas Rancang Dosen");
     
     glutDisplayFunc(RenderScreen);
-    glutReshapeFunc(OnWindowReshape);
+    glutReshapeFunc(OnWindowReshape); 
+    glutTimerFunc(0, Blit, 16);
+
+    SetShapesDrawMode(GL_TRIANGLE_FAN);
+    b2BodyDef gbd;
+    gbd.position.Set(4.0f, ((float)(windowHeight)/(float)(WINDOW_WIDTH) * 10));
+    
+    b2Body * gb = world.CreateBody(&gbd);
+    b2PolygonShape gbp;
+    gbp.SetAsBox(1, 0.1f);
+
+    gb->CreateFixture(&gbp, 0.0f);
 
     glutMainLoop();
 

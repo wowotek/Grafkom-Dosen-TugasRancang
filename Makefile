@@ -8,7 +8,7 @@ EXEC	= dosenTR.app
 OBJ		= build/o
 BIN		= build/bin
 
-OREQ	= shape.o entity.o main.o
+OREQ	= shape.o entity.o texture.o main.o
 
 all: build run
 
@@ -85,10 +85,14 @@ entity.o: src/entity.cc src/entity.hh
 	@echo "[MAKE]    | compiling shape.o"
 	@$(CC) $(CFLAGS) -c src/entity.cc -o $(OBJ)/entity.o
 
+texture.o: src/texture.cc src/texture.hh
+	@echo "[MAKE]    | compiling texture.o"
+	@$(CC) $(CFLAGS) -c src/texture.cc -o $(OBJ)/texture.o
+
 main.o: src/main.cc
 	@echo "[MAKE]    | compiling main.o"
 	@$(CC) $(CFLAGS) -c src/main.cc -o $(OBJ)/main.o
 
 $(EXEC): $(OREQ)
 	@echo "[MAKE]    | building executables [$(OREQ)]"
-	@$(CC) $(CFLAGS) $(OBJ)/shape.o $(OBJ)/entity.o $(OBJ)/main.o lib/libBox2D.a $(CDEPS) $(CCOMP) -o $(BIN)/$(EXEC)
+	@$(CC) $(CFLAGS) $(OBJ)/shape.o $(OBJ)/entity.o $(OBJ)/texture.o $(OBJ)/main.o lib/libBox2D.a $(CDEPS) $(CCOMP) -o $(BIN)/$(EXEC)
