@@ -25,7 +25,7 @@ build: preparation buildnotice $(EXEC)
 buildnotice:
 	@echo "[MAKE] building projects..."
 
-preparation: clean create cpbox2d 
+preparation: clean create cpdata cpbox2d 
 
 create:
 	@echo "[MAKE] creating build folder..."
@@ -40,6 +40,10 @@ clean:
 	@rm -rf build/
 	@echo ""
 
+cpdata:
+	@echo "[MAKE] copying data folder..."
+	@cp -r data/ build/bin/data/
+	@echo ""
 # BOX2D RELATED
 
 dlbox2d:
@@ -99,4 +103,4 @@ main.o: src/main.cc
 
 $(EXEC): $(OREQ)
 	@echo "[MAKE]    | building executables [$(OREQ)]"
-	@$(CC) $(CFLAGS) $(OBJ)/shape.o $(OBJ)/entity.o $(OBJ)/control.o $(OBJ)/texture.o $(OBJ)/main.o lib/libBox2D.a $(CDEPS) $(CCOMP) -o $(BIN)/$(EXEC)
+	@$(CC) $(CFLAGS) $(OBJ)/texture.o $(OBJ)/shape.o $(OBJ)/entity.o $(OBJ)/control.o $(OBJ)/main.o lib/libBox2D.a $(CDEPS) $(CCOMP) -o $(BIN)/$(EXEC)

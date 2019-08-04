@@ -4,6 +4,14 @@
 #include "common.hh"
 #include "shape.hh"
 
+unsigned int * texEntP;
+
+void
+InitEntityTextures(unsigned int * initTexture)
+{
+    texEntP = initTexture;
+}
+
 Entity::Entity(b2Vec2 initPos, float initSize, EntityType initType, b2World * worldPointer)
 {
     this->pos = initPos;
@@ -43,35 +51,25 @@ Entity::Entity(b2Vec2 initPos, float initSize, EntityType initType, b2World * wo
     
     this->fixtureDef.density = 1.0f;
     this->fixtureDef.friction = 0.3f;
-    this->fixtureDef.restitution = 1.1f;
+    this->fixtureDef.restitution = 0.5f;
     this->body->CreateFixture(&fixtureDef);
 }
 
 void
 Entity::DrawEntity()
 {
-    // for(b2Fixture* f = body->GetFixtureList(); f; f = f->GetNext())
-    // {
-    //     b2Shape::Type shapeType = f->GetType();
-    //     if(shapeType == b2Shape::e_circle){
-    //         b2CircleShape* circleShape = (b2CircleShape*)f->GetShape();
-    //     } else if(shapeType == b2Shape::e_polygon){
-    //         b2PolygonShape* polygonShape = (b2PolygonShape*)f->GetShape();
-    // }
-
     if(type==SQUARE){
-        Square(body->GetPosition(), size, body->GetAngle());
+        Square(body->GetPosition(), size, body->GetAngle(), texEntP[0]);
     } else if (type==TRIANGLE) {
-        Triangle(body->GetPosition(), size, body->GetAngle());
+        Triangle(body->GetPosition(), size, body->GetAngle(), texEntP[0]);
     } else if (type==CIRCLE) {
-        Circle(body->GetPosition(), size, body->GetAngle());
-
-        // std::cout << body->GetPosition().x  << " " << body->GetPosition().y << std::endl;
-        // glColor3f(0, 1, 1);
-        // glPointSize(5);
-        // glBegin(GL_LINES);
-        //     glVertex2f(up2(body->GetPosition()));
-        //     glVertex2f(up2add(body->GetPosition(), circleShape.m_radius, 0));
-        // glEnd();
+        Circle(body->GetPosition(), size, body->GetAngle(), texEntP[1]);
     }
+}
+
+bool
+Entity::IsMouseInside(float x, float y)
+{
+    return (x > body->GetPosition().x - (size/1.5f) && x < body->GetPosition().x + (size/1.5f) &&
+       y > body->GetPosition().y - (size/1.5f) && y < body->GetPosition().y + (size/1.5f));
 }

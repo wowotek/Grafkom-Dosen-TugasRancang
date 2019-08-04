@@ -9,6 +9,8 @@ enum EntityType{
     CIRCLE
 };
 
+void InitEntityTextures(unsigned int * initTexture);
+
 class Entity {
     private:
         b2BodyDef bodyDef;
@@ -28,6 +30,7 @@ class Entity {
         Entity(b2Vec2, float, EntityType, b2World *);
 
         void DrawEntity();
+        bool IsMouseInside(float, float);
 };
 
 #endif
