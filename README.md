@@ -23,12 +23,37 @@
 
 ## Deskripsi Tugas
 
-> NOTE : Belum ada ketentuan dari dosen terkait. harap update ini segera setelah mendapatkan ketentuan resmi dari dosen terkait
-buat tugas susah pokoke
-
 ### Pembakuan
 
-> NOTE : Belum ada ketentuan dari dosen terkait. harap update ini segera setelah mendapatkan ketentuan resmi dari dosen terkait
+* **Ketentuan Pengerjaan**
+  * Dikerjakan berkelompok, Min 2 mahasiswa, Max 3 mahasiswa
+  * Wajib menggunakan GIT. Invite dosen ke repository kelompok
+kalian.
+  * Semua mahasiswa wajib berkontribusi dalam pembuatan aplikasi.
+Semua dipantau dari commit history.
+  * Responsi akan dilaksanakan pada Senin, 5 Agustus 2019 jam 10-12
+di FTI333.
+* **Keterangan Aplikasi**
+  * Ukuran layar diseragamkan 800x600 pixels.
+  * Wajib menggunakan Bahasa C++.
+  * Wajib menerapkan konsep OOP.
+  * Semua objek yang dibuat akan terkena hukum fisika.
+  * Setiap objek dapat berinteraksi dengan mouse.
+  * Proses pembuatan objek ditentukan oleh keyboard.
+  * Khusus objek square wajib menggunakan texture.
+
+
+## Penggunaan
+
+* Keyboard
+  * `A` = Mode Segitiga
+  * `S` = Mode Kotak
+  * `D` = Mode Lingkaran
+  * `C` = Switch Mode Create Shape
+
+* Mouse
+  * `Left_Mouse_Click` = Create Shape / Attach Shape To Mouse
+
 
 ## Kompilasi
 
@@ -261,18 +286,3 @@ void Makanan::makan(Makanan makanan);
 
 #endif
 ```
-
-### *Forking* dan *Cloning* Repository
-
-setelah memahami beberapa panduan diatas, anda dapat mulai melakukan kontribusi dengan melakukan *Forking* lalu *Clone* dengan :
-
-1. **Forking**:
-fungsi forking adalah membuat branch baru dengan project baru pada akun personal anda, jadi tidak mengganggu project utama
-![Forking](.readme/fork.png)
-
-2. **Cloning**
-
-    ```bash
-    git clone https://github.com/wowotek/Grafkom-Dosen-TugasRancang
-    ```
-
