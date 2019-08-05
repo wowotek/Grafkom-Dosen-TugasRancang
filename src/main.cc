@@ -22,6 +22,8 @@ b2Vec2 gravity(0.0f, 9.82f);
 b2World world(gravity);
 std::vector<Entity> entities;
 
+Spring mouseSpring;
+
 void
 RenderScreen()
 {
@@ -29,6 +31,7 @@ RenderScreen()
     glClear(GL_COLOR_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
 
+    mouseSpring.Update();
     for(size_t i=0; i<entities.size(); i++)
     {
         entities.at(i).DrawEntity();
@@ -41,7 +44,7 @@ void
 Blit(int rate)
 {
     world.Step((1.0f/60.0f), 10, 10);
-
+    mouseSpring.Update();
     glutSwapBuffers();
     glutPostRedisplay();
     glutTimerFunc(rate, Blit, rate);
@@ -117,6 +120,7 @@ InitStaticBodies()
         rightBodyShape.Set(rightWallVertices, 4);
         rightBody->CreateFixture(&rightBodyShape, 0.0f);
     }
+
 }
 
 void
@@ -157,12 +161,14 @@ main(int argc, char** argv)
     
     InitTextures();
     glEnable(GL_TEXTURE_2D);
-    InitControl(&entities, &world, &windowWidth, &windowHeight);
+    InitControl(&entities, &world, &mouseSpring, &windowWidth, &windowHeight);
     InitStaticBodies();
 
     glutDisplayFunc(RenderScreen);
     glutReshapeFunc(OnWindowReshape);
     glutKeyboardFunc(KeyboardDownHandler);
+    glutMotionFunc(MouseDragHandler);
+    glutPassiveMotionFunc(MouseHoverHandler);
     glutMouseFunc(MouseDownHandler);
 
     glutTimerFunc(0, Blit, 16);

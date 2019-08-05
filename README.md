@@ -30,6 +30,17 @@ buat tugas susah pokoke
 
 > NOTE : Belum ada ketentuan dari dosen terkait. harap update ini segera setelah mendapatkan ketentuan resmi dari dosen terkait
 
+## Penggunaan
+
+* Keyboard
+  * `A` = Mode Segitiga
+  * `S` = Mode Kotak
+  * `D` = Mode Lingkaran
+  * `C` = Switch Mode Create Shape
+* Mouse
+  * `Left_Mouse_Click` = Create Shape / Attach Shape To Mouse
+
+
 ## Kompilasi
 
 ### Cloning
