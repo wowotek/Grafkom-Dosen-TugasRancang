@@ -23,12 +23,25 @@
 
 ## Deskripsi Tugas
 
-> NOTE : Belum ada ketentuan dari dosen terkait. harap update ini segera setelah mendapatkan ketentuan resmi dari dosen terkait
-buat tugas susah pokoke
-
 ### Pembakuan
 
-> NOTE : Belum ada ketentuan dari dosen terkait. harap update ini segera setelah mendapatkan ketentuan resmi dari dosen terkait
+* **Ketentuan Pengerjaan**
+  * Dikerjakan berkelompok, Min 2 mahasiswa, Max 3 mahasiswa
+  * Wajib menggunakan GIT. Invite dosen ke repository kelompok
+kalian.
+  * Semua mahasiswa wajib berkontribusi dalam pembuatan aplikasi.
+Semua dipantau dari commit history.
+  * Responsi akan dilaksanakan pada Senin, 5 Agustus 2019 jam 10-12
+di FTI333.
+* **Keterangan Aplikasi**
+  * Ukuran layar diseragamkan 800x600 pixels.
+  * Wajib menggunakan Bahasa C++.
+  * Wajib menerapkan konsep OOP.
+  * Semua objek yang dibuat akan terkena hukum fisika.
+  * Setiap objek dapat berinteraksi dengan mouse.
+  * Proses pembuatan objek ditentukan oleh keyboard.
+  * Khusus objek square wajib menggunakan texture.
+
 
 ## Penggunaan
 
@@ -37,6 +50,7 @@ buat tugas susah pokoke
   * `S` = Mode Kotak
   * `D` = Mode Lingkaran
   * `C` = Switch Mode Create Shape
+
 * Mouse
   * `Left_Mouse_Click` = Create Shape / Attach Shape To Mouse
 
