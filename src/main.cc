@@ -31,12 +31,21 @@ RenderScreen()
     glClear(GL_COLOR_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
 
+    glBindTexture(GL_TEXTURE_2D, mattextures[2]);
+    glBegin(GL_POLYGON);
+        glTexCoord2f(0, 1); glVertex2f(0, 0);
+        glTexCoord2f(1, 1); glVertex2f(((float)(windowWidth)/(float)(WINDOW_WIDTH) * 10), 0);
+        glTexCoord2f(1, 0); glVertex2f(((float)(windowWidth)/(float)(WINDOW_WIDTH) * 10), ((float)(windowHeight)/(float)(WINDOW_WIDTH)*10));
+        glTexCoord2f(0, 0); glVertex2f(0, ((float)(windowHeight)/(float)(WINDOW_WIDTH) * 10));
+    glEnd();
+
     mouseSpring.Update();
     for(size_t i=0; i<entities.size(); i++)
     {
         entities.at(i).DrawEntity();
     }
 
+    mouseSpring.Update();
     glutSwapBuffers();
 }
 
@@ -130,6 +139,7 @@ InitTextures()
     glGenTextures(3, mattextures);
     LoadTexture(mattextures[0], "data/brick.bmp", 512, 512);
     LoadTexture(mattextures[1], "data/rubber.bmp", 512, 512);
+    LoadTexture(mattextures[2], "data/bg.bmp", 420, 420);
 
     InitShapeTextures(mattextures);
     InitEntityTextures(mattextures);

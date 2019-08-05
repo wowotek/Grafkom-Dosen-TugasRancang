@@ -18,10 +18,6 @@ Spring::SetMousePos(b2Vec2 * mousePositionPointer)
 void
 Spring::SetGroundBody()
 {
-    this->adef.type = b2_kinematicBody;
-    this->adef.position = b2Vec2(this->mousePosition->x*2.0f, this->mousePosition->y*2.0f);
-    this->bodyA = this->worldPoint->CreateBody(&this->adef);
-    this->bodyA->SetAwake(true);
 }
 
 void
@@ -49,12 +45,6 @@ Spring::Update()
             glVertex2f(mx, my);
             glVertex2f(bx, by);
         glEnd();
-
-        std::cout << ax << " " << ay << " | ";
-        std::cout << bx << " " << by << " | ";
-        std::cout << mx << " " << my << " | ";
-        std::cout << awp.x << " " << awp.y << " | ";
-        std::cout << std::endl;
     }
 }
 
@@ -63,12 +53,18 @@ Spring::Joint(b2Body * targetBody)
 {
     this->bodyB = targetBody;
 
+    this->adef.type = b2_kinematicBody;
+    this->adef.position = b2Vec2(this->mousePosition->x, this->mousePosition->y);
+    this->adef.fixedRotation = true;
+    this->bodyA = this->worldPoint->CreateBody(&this->adef);
+    this->bodyA->SetAwake(true);
+
     this->jointDef.bodyA = this->bodyA;
     this->jointDef.bodyB = targetBody;
     this->jointDef.collideConnected = false;
-    this->jointDef.dampingRatio = 0.1f;
-    this->jointDef.frequencyHz = 0.5f;
-    this->jointDef.maxForce = 5000000000.0f * this->bodyB->GetMass();
+    this->jointDef.dampingRatio = 0.00001f;
+    this->jointDef.frequencyHz = 120.0f;
+    this->jointDef.maxForce = 50.0f * targetBody->GetMass();
 
     this->joint = (b2MouseJoint*)this->worldPoint->CreateJoint(&this->jointDef);
     this->jointed = true;
