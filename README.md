@@ -12,6 +12,8 @@
 >  
 > **PERINGATAN** : *Tugas ini dirilis **tanpa garansi**, termasuk nilai yang di-nihilkan oleh sebab **mencontek** dan/atau **menyalin** dan/atau **meniru** yang bersumber dari tugas ini*
 
+![thumbnail](./screenshot.png)
+
 ## Pengawas / Dosen
 
 * **Pratyaksa Ocsa Saian** - *@pratyaksaocsa*
